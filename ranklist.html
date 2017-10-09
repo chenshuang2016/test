@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>端午節賽龍舟</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="description" content="" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="cleartype" content="on" />
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/ranklist.css">
+    <script src="js/flexible.js"></script>
+    <script src="js/underscore.js"></script>
+</head>
+    <script>
+        var token = '<?=$token;?>';
+        var pfid = '<?=$pfid;?>';
+        var share_url_head = '<?=$share_url_head;?>';
+        var anchor_pfid = '<?=$anchor_pfid;?>';
+    </script>
+<body>
+    <img src="images/top.png" alt="" class="backTop">
+    <header>
+        <img src="images/tabtohome.png" alt="" class="tabtohome">
+
+        <div class="countDownArea">
+            <img class="topImg" src="images/home/top300.png" alt="">
+            <!--<span class="hours" id="leftHours">72</span>-->
+            <!--<span class="minutes" id="leftMinutes">45</span>-->
+            <!--<img class="marks" src="images/home/marks.png" alt="">-->
+        </div>
+
+        <img class="viewRules" src="images/home/rulebtn.png" alt="">
+    </header>
+
+    <div class="content">
+        <div class="tabWrap">
+            <ul>
+                <li class="active">龍舟爭霸榜</li>
+                <li>水手风云榜</li>
+            </ul>
+        </div>
+        <!--排行榜区域-->
+        <div class="listWrap">
+            <ul class="bannerWrap dragonList">
+                <!--第1-50名-->
+                <script type="text/template" id="dragonList">
+                    <!--第1-50名-->
+                    <% if(dragonAllList.first){%>
+                        <div class="gradeListWrap">
+                            <div class="gradeList">第1-50名</div>
+                            <i class="arrow arrowTop" data-index="1-50"></i>
+                        </div>
+                        <ul class="dragonListWrap" data-index="1-50">
+                            <% dragonAllList.first.forEach(function(item,index){%>
+
+                                <li>
+                                    <div class="grade"><%= index+1 %></div>
+                                    <img src="<%= item.headimg%>" alt="" class="headimg" data-pfid="<%= item.pfid%>" data-nickname="<%= item.nickname%>" data-liveid="<%= item.live_id%>" data-liveurl="<%= item.live_url%>" data-direction="<%= item.stream_direction%>" data-livekey="<%= item.live_key%>" >
+                                    <div class="avtarInfo">
+                                        <div class="nickName"><%= item.nickname%></div>
+                                        <div class="miles">前进里程: <%= item.distance%>m</div>
+                                    </div>
+                                    <%if(item.live_id != null){%>
+                                    <img src="images/isliveing.png" alt="" class="live">
+                                    <%}%>
+                                </li>
+                            <%})%>
+                        </ul>
+                    <%}%>
+                    <!--第51-100名-->
+                    <% if(dragonAllList.second){%>
+                        <div class="gradeListWrap">
+                            <div class="gradeList">第51-100名</div>
+                            <div class="arrowWrap">
+                                <i class="arrow arrowBottom" data-index="51-100"></i>
+                            </div>
+                        </div>
+                        <ul class="dragonListWrap" data-index="51-100" style="display: none;">
+                            <% dragonAllList.second.forEach(function(item,index){%>
+
+                            <li>
+                                <div class="grade"><%= index+51 %></div>
+                                <img src="<%= item.headimg%>" alt="" class="headimg" data-pfid="<%= item.pfid%>" data-nickname="<%= item.nickname%>" data-liveid="<%= item.live_id%>" data-liveurl="<%= item.live_url%>" data-direction="<%= item.stream_direction%>" data-livekey="<%= item.live_key%>" >
+                                <div class="avtarInfo">
+                                    <div class="nickName"><%= item.nickname%></div>
+                                    <div class="miles">前进里程: <%= item.distance%>m</div>
+                                </div>
+                                <%if(item.live_id != null){%>
+                                <img src="images/isliveing.png" alt="" class="live">
+                                <%}%>
+                            </li>
+                            <%})%>
+                        </ul>
+                    <%}%>
+                    <!--第101-150名-->
+                    <% if(dragonAllList.third){%>
+                        <div class="gradeListWrap">
+                            <div class="gradeList">第101-150名</div>
+                            <div class="arrowWrap">
+                                <i class="arrow arrowBottom" data-index="101-150"><</i>
+                            </div>
+                        </div>
+                        <ul class="dragonListWrap" data-index="101-150" style="display: none;">
+                            <% dragonAllList.third.forEach(function(item,index){%>
+
+                            <li>
+                                <div class="grade"><%= index+101 %></div>
+                                <img src="<%= item.headimg%>" alt="" class="headimg" data-pfid="<%= item.pfid%>" data-nickname="<%= item.nickname%>" data-liveid="<%= item.live_id%>" data-liveurl="<%= item.live_url%>" data-direction="<%= item.stream_direction%>" data-livekey="<%= item.live_key%>" >
+                                <div class="avtarInfo">
+                                    <div class="nickName"><%= item.nickname%></div>
+                                    <div class="miles">前进里程: <%= item.distance%>m</div>
+                                </div>
+                                <%if(item.live_id != null){%>
+                                <img src="images/isliveing.png" alt="" class="live">
+                                <%}%>
+                            </li>
+                            <%})%>
+                        </ul>
+                    <%}%>
+                    <!--第151-200名-->
+                    <% if(dragonAllList.fourth){%>
+                        <div class="gradeListWrap">
+                            <div class="gradeList">第151-200名</div>
+                            <div class="arrowWrap">
+                                <i class="arrow arrowTop" data-index="151-200"><</i>
+                            </div>
+                        </div>
+                        <ul class="dragonListWrap" data-index="151-200" style="display: none;">
+                            <% dragonAllList.fourth.forEach(function(item,index){%>
+
+                            <li>
+                                <div class="grade"><%= index+1 %></div>
+                                <img src="<%= item.headimg%>" alt="" class="headimg" data-pfid="<%= item.pfid%>" data-nickname="<%= item.nickname%>" data-liveid="<%= item.live_id%>" data-liveurl="<%= item.live_url%>" data-direction="<%= item.stream_direction%>" data-livekey="<%= item.live_key%>" >
+                                <div class="avtarInfo">
+                                    <div class="nickName"><%= item.nickname%></div>
+                                    <div class="miles">前进里程: <%= item.distance%>m</div>
+                                </div>
+                                <%if(item.live_id != null){%>
+                                <img src="images/isliveing.png" alt="" class="live">
+                                <%}%>
+                            </li>
+                            <%})%>
+                        </ul>
+                    <%}%>
+                    <!--第201-250名-->
+                    <% if(dragonAllList.fifth){%>
+                        <div class="gradeListWrap">
+                            <div class="gradeList">第201-250名</div>
+                            <div class="arrowWrap">
+                                <i class="arrow arrowTop" data-index="201-250"><</i>
+                            </div>
+                        </div>
+                        <ul class="dragonListWrap" data-index="201-250" style="display: none;">
+                            <% dragonAllList.fifth.forEach(function(item,index){%>
+
+                            <li>
+                                <div class="grade"><%= index+1 %></div>
+                                <img src="<%= item.headimg%>" alt="" class="headimg" data-pfid="<%= item.pfid%>" data-nickname="<%= item.nickname%>" data-liveid="<%= item.live_id%>" data-liveurl="<%= item.live_url%>" data-direction="<%= item.stream_direction%>" data-livekey="<%= item.live_key%>" >
+                                <div class="avtarInfo">
+                                    <div class="nickName"><%= item.nickname%></div>
+                                    <div class="miles">前进里程: <%= item.distance%>m</div>
+                                </div>
+                                <%if(item.live_id != null){%>
+                                <img src="images/isliveing.png" alt="" class="live">
+                                <%}%>
+                            </li>
+                            <%})%>
+                        </ul>
+                    <%}%>
+                    <!--第251-300名-->
+                    <% if(dragonAllList.sixth){%>
+                        <div class="gradeListWrap">
+                            <div class="gradeList">第251-300名</div>
+                            <div class="arrowWrap">
+                                <i class="arrow arrowTop" data-index="251-300"><</i>
+                            </div>
+                        </div>
+                        <ul class="dragonListWrap" data-index="251-300" style="display: none;">
+                            <% dragonAllList.sixth.forEach(function(item,index){%>
+
+                            <li>
+                                <div class="grade"><%= index+1 %></div>
+                                <img src="<%= item.headimg%>" alt="" class="headimg" data-pfid="<%= item.pfid%>" data-nickname="<%= item.nickname%>" data-liveid="<%= item.live_id%>" data-liveurl="<%= item.live_url%>" data-direction="<%= item.stream_direction%>" data-livekey="<%= item.live_key%>" >
+                                <div class="avtarInfo">
+                                    <div class="nickName"><%= item.nickname%></div>
+                                    <div class="miles">前进里程: <%= item.distance%>m</div>
+                                </div>
+                                <%if(item.live_id != null){%>
+                                <img src="images/isliveing.png" alt="" class="live">
+                                <%}%>
+                            </li>
+                            <%})%>
+                        </ul>
+                    <%}%>
+                </script>
+            </ul>
+            <!--水手风云榜-->
+            <ul class="bannerWrap bigPower" >
+                <!--风云榜模板-->
+                <script type="text/template" id="bigPower">
+                    <% if(bigPowerList[0]){%>
+                        <div class="one">
+                            <img src="images/one.png" alt="" class="oneGrade">
+                            <li style="border-bottom: none;">
+                                <div class="grade first">01</div>
+                                <img src="<%= bigPowerList[0].headimg%>" alt="" class="headimg" data-pfid="<%= bigPowerList[0].pfid%>" data-nickname="<%= bigPowerList[0].nickname%>"  >
+                                <div class="avtarInfo">
+                                    <div class="nickName"><%= bigPowerList[0].nickname%></div>
+                                    <div class="miles">貢獻里程: <%= bigPowerList[0].distance%>m</div>
+                                </div>
+                            </li>
+                        </div>
+                    <%}%>
+                    <%if(bigPowerList[1]){%>
+                        <div class="one">
+                            <img src="images/two.png" alt="" class="oneGrade">
+                            <li >
+                                <div class="grade second">02</div>
+                                <img src="<%= bigPowerList[1].headimg%>" alt="" class="headimg" data-pfid="<%= bigPowerList[1].pfid%>" data-nickname="<%= bigPowerList[1].nickname%>"  >
+                                <div class="avtarInfo">
+                                    <div class="nickName"><%= bigPowerList[1].nickname%></div>
+                                    <div class="miles">貢獻里程: <%= bigPowerList[1].distance%>m</div>
+                                </div>
+                            </li>
+                            <%if(bigPowerList[2]){%>
+                                <li >
+                                    <div class="grade second">03</div>
+                                    <img src="<%= bigPowerList[2].headimg%>" alt="" class="headimg" data-pfid="<%= bigPowerList[2].pfid%>" data-nickname="<%= bigPowerList[2].nickname%>"  >
+                                    <div class="avtarInfo">
+                                        <div class="nickName"><%= bigPowerList[2].nickname%></div>
+                                        <div class="miles">貢獻里程: <%= bigPowerList[2].distance%>m</div>
+                                    </div>
+                                </li>
+                            <%}%>
+                        </div>
+                    <%}%>
+
+                    <%if(bigPowerList[3]){%>
+                        <div class="one">
+                            <img src="images/three.png" alt="" class="oneGrade">
+                            <li >
+                                <div class="grade third">04</div>
+                                <img src="<%= bigPowerList[3].headimg%>" alt="" class="headimg" data-pfid="<%= bigPowerList[3].pfid%>" data-nickname="<%= bigPowerList[3].nickname%>"  >
+                                <div class="avtarInfo">
+                                    <div class="nickName"><%= bigPowerList[3].nickname%></div>
+                                    <div class="miles">貢獻里程: <%= bigPowerList[3].distance%>m</div>
+                                </div>
+                            </li>
+                            <%if(bigPowerList[4]){%>
+                                <li >
+                                    <div class="grade third">05</div>
+                                    <img src="<%= bigPowerList[4].headimg%>" alt="" class="headimg" data-pfid="<%= bigPowerList[4].pfid%>" data-nickname="<%= bigPowerList[4].nickname%>"  >
+                                    <div class="avtarInfo">
+                                        <div class="nickName"><%= bigPowerList[4].nickname%></div>
+                                        <div class="miles">貢獻里程: <%= bigPowerList[4].distance%>m</div>
+                                    </div>
+                                </li>
+                            <%}%>
+                            <% if(bigPowerList[5]){%>
+                                <li >
+                                    <div class="grade third">06</div>
+                                    <img src="<%= bigPowerList[5].headimg%>" alt="" class="headimg" data-pfid="<%= bigPowerList[5].pfid%>" data-nickname="<%= bigPowerList[5].nickname%>"  >
+                                    <div class="avtarInfo">
+                                        <div class="nickName"><%= bigPowerList[5].nickname%></div>
+                                        <div class="miles">貢獻里程: <%= bigPowerList[5].distance%>m</div>
+                                    </div>
+                                </li>
+                            <%}%>
+                            <%if(bigPowerList[6]){%>
+                                <li >
+                                    <div class="grade third">07</div>
+                                    <img src="<%= bigPowerList[6].headimg%>" alt="" class="headimg" data-pfid="<%= bigPowerList[6].pfid%>" data-nickname="<%= bigPowerList[6].nickname%>"  >
+                                    <div class="avtarInfo">
+                                        <div class="nickName"><%= bigPowerList[6].nickname%></div>
+                                        <div class="miles">貢獻里程: <%= bigPowerList[6].distance%>m</div>
+                                    </div>
+                                </li>
+                            <%}%>
+
+                        </div>
+                    <%}%>
+                    <!--<%if(bigPowerList[1]){%>-->
+                    <!--<%}%>-->
+                    <%if(bigPowerList[7]){%>
+                        <div class="one">
+                            <img src="images/fourth.png" alt="" class="oneGrade">
+                            <li >
+                                <div class="grade fourth">08</div>
+                                <img src="<%= bigPowerList[7].headimg%>" alt="" class="headimg" data-pfid="<%= bigPowerList[7].pfid%>" data-nickname="<%= bigPowerList[7].nickname%>"  >
+                                <div class="avtarInfo">
+                                    <div class="nickName"><%= bigPowerList[7].nickname%></div>
+                                    <div class="miles">貢獻里程: <%= bigPowerList[7].distance%>m</div>
+                                </div>
+                            </li>
+                            <%if(bigPowerList[8]){%>
+                                <li >
+                                    <div class="grade fourth">09</div>
+                                    <img src="<%= bigPowerList[8].headimg%>" alt="" class="headimg" data-pfid="<%= bigPowerList[8].pfid%>" data-nickname="<%= bigPowerList[8].nickname%>"  >
+                                    <div class="avtarInfo">
+                                        <div class="nickName"><%= bigPowerList[8].nickname%></div>
+                                        <div class="miles">貢獻里程: <%= bigPowerList[8].distance%>m</div>
+                                    </div>
+                                </li>
+                            <%}%>
+                            <%if(bigPowerList[9]){%>
+                                <li >
+                                    <div class="grade fourth">10</div>
+                                    <img src="<%= bigPowerList[9].headimg%>" alt="" class="headimg" data-pfid="<%= bigPowerList[9].pfid%>" data-nickname="<%= bigPowerList[9].nickname%>"  >
+                                    <div class="avtarInfo">
+                                        <div class="nickName"><%= bigPowerList[9].nickname%></div>
+                                        <div class="miles">貢獻里程: <%= bigPowerList[9].distance%>m</div>
+                                    </div>
+                                </li>
+                            <%}%>
+                        </div>
+                    <%}%>
+
+                </script>
+
+            </ul>
+            <img src="images/bottomCloudBg.png" alt="" class="bottomCloudBg">
+        </div>
+    </div>
+    <!--底部信息区域-->
+    <div class="myInfo myInfoDragon">
+        <script type="text/template" id="myInfoDragon">
+            <img src="<%= data.my.headimg %>" alt="" class="headimg">
+            <div class="avtarInfo">
+                <div class="nickName"><%= data.my.nickname%></div>
+                <div class="miles">前进里程: <%= data.my.distance %>m</div>
+            </div>
+            <% if(data.my.in_list == -1){%>
+                <div class="grade">未上榜</div>
+            <%}%>
+            <% if(data.my.in_list != -1){%>
+                <div class="grade">第<span><%= data.my.rank%></span>名</div>
+            <%}%>
+        </script>
+    </div>
+    <div class="myInfo myInfoBigPower " style="display: none;">
+        <script type="text/template" id="myInfoBigPower">
+            <img src="<%= data.my_fans_info.headimg %>" alt="" class="headimg">
+            <div class="avtarInfo">
+                <div class="nickName"><%= data.my_fans_info.nickname%></div>
+                <div class="miles">貢獻里程: <%= data.my_fans_info.distance %>m</div>
+            </div>
+            <% if(data.my_fans_info.in_list == -1){%>
+                <div class="grade">未上榜</div>
+            <%}%>
+            <% if(data.my_fans_info.in_list != -1){%>
+                <div class="grade">第<span><%= data.my_fans_info.rank%></span>名</div>
+            <%}%>
+        </script>
+    </div>
+    <!--活動細則-->
+    <div class="rulesMask">
+        <div class="rulesCon">
+            <img class="rulesTitleImg" src="images/rulesTitleImg.png" alt="">
+            <div> <span style="font-weight:bold">活動期間</span><br/>&nbsp;&nbsp;2017/5/27 11:00:00 ~ 2017/6/4 23:59:59</div>
+            <div style="font-weight:bold">活動規則</div>
+            <dl>1.  活動期間，根據主播收到的端午節禮物計算龍舟行進里程，收到<span class="redtext">敲敲</span>前進1米/個、收到<span class="redtext">粽子敲敲</span>前進1米/個，收到<span class="redtext">龍舟</span>前進200米/個。禮物暴擊時可額外增加龍舟前進里程；</dl>
+            <dl>2.  主播龍舟每前進3000米，直播間可立刻獲得官方紅包一個；龍舟等級越高，獲得3000浪花紅包概率越大，具體概率如下：</dl>
+
+            <table class="nn">
+                <thead>
+                <th>行進里程    </th>
+                <th>龍舟等級</th>
+                <th>500浪花<br/>紅包概率</th>
+                <th>3000浪花<br/>紅包概率</th>
+                </thead>
+                <tbody>
+                <tr><td>小於20000米 </td><td>  1</td><td>100%</td><td>0%</td></tr>
+                <tr><td>達到20000米 </td><td>  2</td><td>95%</td><td>5%</td></tr>
+                <tr><td>達到40000米 </td><td>  3</td><td>90%</td><td>10%</td></tr>
+                <tr><td>達到60000米 </td><td>  4</td><td>80%</td><td>20%</td></tr>
+                <tr><td>達到100000米</td><td>  5</td><td>70%</td><td>30%</td></tr>
+                </tbody>
+            </table>
+
+            <dl>3.  5月30日起進入龍舟爭霸賽晉級賽階段，每日根據龍舟行進里程排名進入次日榜單，未晉級的主播不再計算行進里程數，具體每日晉級規則如下：</dl>
+            <table>
+                <thead>
+                <th>晉級日期</th>
+                <th>晉級排名</th>
+                </thead>
+                <tbody>
+
+                <tr><td>5月30日</td><td>Top300</td></tr>
+                <tr><td>5月31日</td><td>Top200</td></tr>
+                <tr><td>6月1日</td><td>Top100</td></tr>
+                <tr><td>6月2日</td><td>Top50</td></tr>
+                <tr><td>6月3日</td><td>Top20</td></tr>
+                <tr><td>6月4日</td><td>冠軍爭霸</td></tr>
+                </tbody>
+            </table>
+
+            <dl>4.  活動結束後，龍舟爭霸排行榜Top20的主播，可以獲得對應的活動獎勵，具體獎勵如下：</dl>
+            <table>
+                <thead>
+                <th>排名</th>
+                <th>獎勵</th>
+                </thead>
+                <tbody>
+                <tr><td>Top1</td><td>    App首页推荐1天</td></tr>
+                <tr><td>Top2-4</td><td>  熱門推薦（2小時，每次1小時）</td></tr>
+                <tr><td>Top5-10</td><td>熱門推薦（1小時）</td></tr>
+                <tr><td>Top11-20</td><td>1週推薦主播</td></tr>
+                </tbody>
+            </table>
+
+            <dl>5.  粉絲贈送端午節禮物可以獲得直播間的貢獻里程，直播間貢獻里程Top10可在活動期間獲得對應直播間稱號（有效期一天，次日發放）；</dl>
+            <table>
+                <thead>
+                <th>活動稱號</th>
+                <th>名額（貢獻值排名）</th>
+                </thead>
+                <tbody>
+                <tr><td>龍舟舵手</td><td>Top1</td></tr>
+                <tr><td>龍舟鼓手</td><td>Top2</td></tr>
+                <tr><td>龍舟划手</td><td>Top3-10</td></tr>
+                </tbody>
+            </table>
+            <dl>6.  活動期間貢獻的總里程數排名Top10的粉絲可進入水手風雲榜，活動結束時，水手風雲榜Top3的用戶可獲得相應稱號（有效期七天，6月5日發放）。</dl>
+            <table>
+                <thead>
+                <th>活動稱號</th>
+                <th>名額（貢獻值排名）</th>
+                </thead>
+                <tbody>
+                <tr><td>龍騎士</td><td>Top1</td></tr>
+                <tr><td>馭龍先鋒</td><td>Top2-3</td></tr>
+                <tr><td>馴龍高手</td><td>Top4-7</td></tr>
+                </tbody>
+            </table>
+            <dl>7.  本活動如因不可抗力之特殊原因無法執行時，浪Live官方有權決定取消、終止、修改或暫停本活動之權利。</dl>
+            <dl>8.  根據浪Live服務條款，利用任何系統或工具，對本公司所提供的服務、伺服器或網路進行干擾、惡意攻擊或破壞、外掛程式、病毒程式、程式漏洞(Bug)或其他違反公平合理之方式參與本活動，浪Live官方有權立即終止或變更任一會員帳號之服務。就終止或更改會員使用本服務所可能產生之困擾、不便或損害，本公司對任何會員或第三人均不負任何責任。</dl>
+            <dl>9.  浪Live官方擁有本活動最終解釋權，並保留隨時修改本活動細節或終止本活動之權利。</dl>
+            <div class="copyright">若您遇有任何問題，請來信service.tw@langlive.com</div>
+
+        </div>
+        <img class="rulesClose" src="images/closeBtn.png" alt="">
+    </div>
+</body>
+<script src="js/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="js/ranklist.js"></script>
+</html>
